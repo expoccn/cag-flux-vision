@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TrendsRouteImport } from './routes/trends'
 import { Route as PumpsRouteImport } from './routes/pumps'
 import { Route as ChillersRouteImport } from './routes/chillers'
+import { Route as AlarmsRouteImport } from './routes/alarms'
 import { Route as AiRouteImport } from './routes/ai'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ChillersIdRouteImport } from './routes/chillers.$id'
@@ -29,6 +30,11 @@ const PumpsRoute = PumpsRouteImport.update({
 const ChillersRoute = ChillersRouteImport.update({
   id: '/chillers',
   path: '/chillers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AlarmsRoute = AlarmsRouteImport.update({
+  id: '/alarms',
+  path: '/alarms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AiRoute = AiRouteImport.update({
@@ -50,6 +56,7 @@ const ChillersIdRoute = ChillersIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/ai': typeof AiRoute
+  '/alarms': typeof AlarmsRoute
   '/chillers': typeof ChillersRouteWithChildren
   '/pumps': typeof PumpsRoute
   '/trends': typeof TrendsRoute
@@ -58,6 +65,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/ai': typeof AiRoute
+  '/alarms': typeof AlarmsRoute
   '/chillers': typeof ChillersRouteWithChildren
   '/pumps': typeof PumpsRoute
   '/trends': typeof TrendsRoute
@@ -67,6 +75,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/ai': typeof AiRoute
+  '/alarms': typeof AlarmsRoute
   '/chillers': typeof ChillersRouteWithChildren
   '/pumps': typeof PumpsRoute
   '/trends': typeof TrendsRoute
@@ -74,13 +83,28 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/ai' | '/chillers' | '/pumps' | '/trends' | '/chillers/$id'
+  fullPaths:
+    | '/'
+    | '/ai'
+    | '/alarms'
+    | '/chillers'
+    | '/pumps'
+    | '/trends'
+    | '/chillers/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/ai' | '/chillers' | '/pumps' | '/trends' | '/chillers/$id'
+  to:
+    | '/'
+    | '/ai'
+    | '/alarms'
+    | '/chillers'
+    | '/pumps'
+    | '/trends'
+    | '/chillers/$id'
   id:
     | '__root__'
     | '/'
     | '/ai'
+    | '/alarms'
     | '/chillers'
     | '/pumps'
     | '/trends'
@@ -90,6 +114,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AiRoute: typeof AiRoute
+  AlarmsRoute: typeof AlarmsRoute
   ChillersRoute: typeof ChillersRouteWithChildren
   PumpsRoute: typeof PumpsRoute
   TrendsRoute: typeof TrendsRoute
@@ -116,6 +141,13 @@ declare module '@tanstack/react-router' {
       path: '/chillers'
       fullPath: '/chillers'
       preLoaderRoute: typeof ChillersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/alarms': {
+      id: '/alarms'
+      path: '/alarms'
+      fullPath: '/alarms'
+      preLoaderRoute: typeof AlarmsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ai': {
@@ -157,6 +189,7 @@ const ChillersRouteWithChildren = ChillersRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AiRoute: AiRoute,
+  AlarmsRoute: AlarmsRoute,
   ChillersRoute: ChillersRouteWithChildren,
   PumpsRoute: PumpsRoute,
   TrendsRoute: TrendsRoute,
