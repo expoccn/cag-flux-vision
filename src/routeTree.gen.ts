@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PumpsRouteImport } from './routes/pumps'
 import { Route as ChillersRouteImport } from './routes/chillers'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ChillersIdRouteImport } from './routes/chillers.$id'
 
+const PumpsRoute = PumpsRouteImport.update({
+  id: '/pumps',
+  path: '/pumps',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ChillersRoute = ChillersRouteImport.update({
   id: '/chillers',
   path: '/chillers',
@@ -32,34 +38,45 @@ const ChillersIdRoute = ChillersIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/chillers': typeof ChillersRouteWithChildren
+  '/pumps': typeof PumpsRoute
   '/chillers/$id': typeof ChillersIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/chillers': typeof ChillersRouteWithChildren
+  '/pumps': typeof PumpsRoute
   '/chillers/$id': typeof ChillersIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/chillers': typeof ChillersRouteWithChildren
+  '/pumps': typeof PumpsRoute
   '/chillers/$id': typeof ChillersIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/chillers' | '/chillers/$id'
+  fullPaths: '/' | '/chillers' | '/pumps' | '/chillers/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/chillers' | '/chillers/$id'
-  id: '__root__' | '/' | '/chillers' | '/chillers/$id'
+  to: '/' | '/chillers' | '/pumps' | '/chillers/$id'
+  id: '__root__' | '/' | '/chillers' | '/pumps' | '/chillers/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ChillersRoute: typeof ChillersRouteWithChildren
+  PumpsRoute: typeof PumpsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/pumps': {
+      id: '/pumps'
+      path: '/pumps'
+      fullPath: '/pumps'
+      preLoaderRoute: typeof PumpsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/chillers': {
       id: '/chillers'
       path: '/chillers'
@@ -99,6 +116,7 @@ const ChillersRouteWithChildren = ChillersRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ChillersRoute: ChillersRouteWithChildren,
+  PumpsRoute: PumpsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
