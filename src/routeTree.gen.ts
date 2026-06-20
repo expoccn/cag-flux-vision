@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TrendsRouteImport } from './routes/trends'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as ReportsRouteImport } from './routes/reports'
 import { Route as PumpsRouteImport } from './routes/pumps'
 import { Route as ChillersRouteImport } from './routes/chillers'
@@ -21,6 +22,11 @@ import { Route as ChillersIdRouteImport } from './routes/chillers.$id'
 const TrendsRoute = TrendsRouteImport.update({
   id: '/trends',
   path: '/trends',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ReportsRoute = ReportsRouteImport.update({
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/chillers': typeof ChillersRouteWithChildren
   '/pumps': typeof PumpsRoute
   '/reports': typeof ReportsRoute
+  '/settings': typeof SettingsRoute
   '/trends': typeof TrendsRoute
   '/chillers/$id': typeof ChillersIdRoute
 }
@@ -76,6 +83,7 @@ export interface FileRoutesByTo {
   '/chillers': typeof ChillersRouteWithChildren
   '/pumps': typeof PumpsRoute
   '/reports': typeof ReportsRoute
+  '/settings': typeof SettingsRoute
   '/trends': typeof TrendsRoute
   '/chillers/$id': typeof ChillersIdRoute
 }
@@ -87,6 +95,7 @@ export interface FileRoutesById {
   '/chillers': typeof ChillersRouteWithChildren
   '/pumps': typeof PumpsRoute
   '/reports': typeof ReportsRoute
+  '/settings': typeof SettingsRoute
   '/trends': typeof TrendsRoute
   '/chillers/$id': typeof ChillersIdRoute
 }
@@ -99,6 +108,7 @@ export interface FileRouteTypes {
     | '/chillers'
     | '/pumps'
     | '/reports'
+    | '/settings'
     | '/trends'
     | '/chillers/$id'
   fileRoutesByTo: FileRoutesByTo
@@ -109,6 +119,7 @@ export interface FileRouteTypes {
     | '/chillers'
     | '/pumps'
     | '/reports'
+    | '/settings'
     | '/trends'
     | '/chillers/$id'
   id:
@@ -119,6 +130,7 @@ export interface FileRouteTypes {
     | '/chillers'
     | '/pumps'
     | '/reports'
+    | '/settings'
     | '/trends'
     | '/chillers/$id'
   fileRoutesById: FileRoutesById
@@ -130,6 +142,7 @@ export interface RootRouteChildren {
   ChillersRoute: typeof ChillersRouteWithChildren
   PumpsRoute: typeof PumpsRoute
   ReportsRoute: typeof ReportsRoute
+  SettingsRoute: typeof SettingsRoute
   TrendsRoute: typeof TrendsRoute
 }
 
@@ -140,6 +153,13 @@ declare module '@tanstack/react-router' {
       path: '/trends'
       fullPath: '/trends'
       preLoaderRoute: typeof TrendsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reports': {
@@ -213,6 +233,7 @@ const rootRouteChildren: RootRouteChildren = {
   ChillersRoute: ChillersRouteWithChildren,
   PumpsRoute: PumpsRoute,
   ReportsRoute: ReportsRoute,
+  SettingsRoute: SettingsRoute,
   TrendsRoute: TrendsRoute,
 }
 export const routeTree = rootRouteImport
