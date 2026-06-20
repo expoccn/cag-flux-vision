@@ -28,7 +28,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { getChiller, chillerTheme } from "@/data/mockCagData";
+import { getChiller, chillerTheme, type ChillerData } from "@/data/mockCagData";
 import { EquipmentRender } from "@/components/cag/equipment-render";
 import { KpiCard } from "@/components/cag/kpi-card";
 import { HealthRing, HealthFactors } from "@/components/cag/health-score";
@@ -61,7 +61,7 @@ function Row({ label, value, unit }: { label: string; value: string | number; un
 }
 
 function ChillerPage() {
-  const c = Route.useLoaderData();
+  const c = Route.useLoaderData() as ChillerData;
   const theme = chillerTheme[c.id];
   const color = theme.hex;
 

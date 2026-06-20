@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ChillersRouteImport } from './routes/chillers'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ChillersIdRouteImport } from './routes/chillers.$id'
 
 const ChillersRoute = ChillersRouteImport.update({
   id: '/chillers',
@@ -22,31 +23,39 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ChillersIdRoute = ChillersIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ChillersRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/chillers': typeof ChillersRoute
+  '/chillers': typeof ChillersRouteWithChildren
+  '/chillers/$id': typeof ChillersIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/chillers': typeof ChillersRoute
+  '/chillers': typeof ChillersRouteWithChildren
+  '/chillers/$id': typeof ChillersIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/chillers': typeof ChillersRoute
+  '/chillers': typeof ChillersRouteWithChildren
+  '/chillers/$id': typeof ChillersIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/chillers'
+  fullPaths: '/' | '/chillers' | '/chillers/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/chillers'
-  id: '__root__' | '/' | '/chillers'
+  to: '/' | '/chillers' | '/chillers/$id'
+  id: '__root__' | '/' | '/chillers' | '/chillers/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ChillersRoute: typeof ChillersRoute
+  ChillersRoute: typeof ChillersRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +74,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/chillers/$id': {
+      id: '/chillers/$id'
+      path: '/$id'
+      fullPath: '/chillers/$id'
+      preLoaderRoute: typeof ChillersIdRouteImport
+      parentRoute: typeof ChillersRoute
+    }
   }
 }
 
+interface ChillersRouteChildren {
+  ChillersIdRoute: typeof ChillersIdRoute
+}
+
+const ChillersRouteChildren: ChillersRouteChildren = {
+  ChillersIdRoute: ChillersIdRoute,
+}
+
+const ChillersRouteWithChildren = ChillersRoute._addFileChildren(
+  ChillersRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ChillersRoute: ChillersRoute,
+  ChillersRoute: ChillersRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
