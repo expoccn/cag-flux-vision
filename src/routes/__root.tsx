@@ -79,14 +79,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "CAG Intelligence AI" },
-      { name: "description", content: "Plataforma de Inteligência Operacional para Central de Água Gelada." },
+      { title: "Teste" },
+      { name: "description", content: "CAG Intelligence AI is a futuristic web dashboard for Central de Água Gelada operations." },
       { name: "author", content: "CAG Intelligence AI" },
-      { property: "og:title", content: "CAG Intelligence AI" },
-      { property: "og:description", content: "Cockpit futurista para operação, engenharia e manutenção da CAG." },
+      { property: "og:title", content: "Teste" },
+      { property: "og:description", content: "CAG Intelligence AI is a futuristic web dashboard for Central de Água Gelada operations." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Teste" },
+      { name: "twitter:description", content: "CAG Intelligence AI is a futuristic web dashboard for Central de Água Gelada operations." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ebedde28-df47-46f6-a756-f50dfe8143ca/id-preview-3436feb9--2539c94a-b270-44b6-a096-b34eec3433f2.lovable.app-1781984981350.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ebedde28-df47-46f6-a756-f50dfe8143ca/id-preview-3436feb9--2539c94a-b270-44b6-a096-b34eec3433f2.lovable.app-1781984981350.png" },
     ],
     links: [
       {
