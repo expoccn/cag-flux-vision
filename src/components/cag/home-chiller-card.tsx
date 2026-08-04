@@ -5,15 +5,15 @@ import { chillerInsight, chillerTheme, type ChillerData } from "@/data/mockCagDa
 import { cn } from "@/lib/utils";
 
 const haloColor: Record<string, string> = {
-  blue: "oklch(0.78 0.22 230 / 0.62)",
-  red: "oklch(0.7 0.28 22 / 0.62)",
-  white: "oklch(0.92 0.05 240 / 0.58)",
+  blue: "oklch(0.76 0.16 232 / 0.62)",
+  red: "oklch(0.66 0.21 24 / 0.62)",
+  white: "oklch(0.9 0.03 240 / 0.62)",
 };
 
 const accentColor: Record<string, string> = {
-  blue: "oklch(0.85 0.22 220)",
-  red: "oklch(0.78 0.26 18)",
-  white: "oklch(0.95 0.02 240)",
+  blue: "oklch(0.82 0.15 224)",
+  red: "oklch(0.72 0.19 20)",
+  white: "oklch(0.93 0.015 240)",
 };
 
 const toneText: Record<string, string> = {
@@ -87,17 +87,17 @@ export function HomeChillerCard({ chiller }: { chiller: ChillerData }) {
       params={{ id: chiller.id }}
       className="group glass-card relative flex min-h-[460px] flex-col overflow-hidden p-3.5 transition-all duration-300 hover:-translate-y-1"
       style={{
-        borderColor: halo.replace("0.62", "0.34"),
-        boxShadow: `0 0 0 1px ${halo.replace("0.62", "0.14")}, 0 22px 70px -28px ${halo}`,
+        borderColor: halo.replace("0.62", "0.22"),
+        boxShadow: `inset 0 1px 0 oklch(1 0 0 / 0.04), 0 26px 60px -34px ${halo}`,
       }}
     >
-      <div className="pointer-events-none absolute inset-0 opacity-70" style={{ background: `radial-gradient(circle at 50% 18%, ${halo}, transparent 45%)` }} />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${accent}, transparent)` }} />
+      <div className="pointer-events-none absolute inset-0 opacity-25" style={{ background: `radial-gradient(circle at 50% 12%, ${halo}, transparent 52%)` }} />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px opacity-70" style={{ background: `linear-gradient(90deg, transparent, ${accent}, transparent)` }} />
 
       <div className="relative z-10 flex items-start justify-between gap-3">
         <div>
           <div className="text-[9px] uppercase tracking-[0.28em] text-muted-foreground">Chiller</div>
-          <h3 className="font-display text-xl font-bold leading-tight tracking-wide" style={{ color: theme.hex, textShadow: `0 0 18px ${halo}` }}>
+          <h3 className="font-display text-xl font-bold leading-tight tracking-wide" style={{ color: theme.hex, textShadow: `0 0 12px ${halo}` }}>
             {chiller.name}
           </h3>
         </div>
@@ -118,18 +118,18 @@ export function HomeChillerCard({ chiller }: { chiller: ChillerData }) {
             />
           ))}
         </div>
-        <div className="pointer-events-none absolute left-1/2 top-1/2 h-56 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full blur-xl" style={{ background: `radial-gradient(closest-side, ${halo}, transparent 72%)` }} />
+        <div className="pointer-events-none absolute left-1/2 top-1/2 h-56 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-55 blur-2xl" style={{ background: `radial-gradient(closest-side, ${halo}, transparent 72%)` }} />
         <img
           src={chillerImage}
           alt={chiller.name}
           loading="lazy"
           draggable={false}
           className="absolute bottom-3 left-1/2 z-10 h-[215px] w-auto max-w-[132%] -translate-x-1/2 object-contain transition-transform duration-500 group-hover:scale-[1.04]"
-          style={{ filter: `drop-shadow(0 18px 22px ${halo}) drop-shadow(0 0 34px ${halo})` }}
+          style={{ filter: `drop-shadow(0 18px 26px oklch(0 0 0 / 0.55)) drop-shadow(0 0 26px ${halo})` }}
         />
         <div
-          className="pointer-events-none absolute bottom-5 left-1/2 z-20 h-5 w-[76%] -translate-x-1/2 rounded-[50%]"
-          style={{ background: `radial-gradient(closest-side, ${accent}, transparent 72%)`, boxShadow: `0 0 24px 5px ${halo}`, opacity: 0.9 }}
+          className="pointer-events-none absolute bottom-5 left-1/2 z-20 h-4 w-[70%] -translate-x-1/2 rounded-[50%]"
+          style={{ background: `radial-gradient(closest-side, ${accent}, transparent 72%)`, boxShadow: `0 0 18px 3px ${halo}`, opacity: 0.5 }}
         />
         <div className="absolute bottom-0 left-6 right-6 h-px" style={{ background: `linear-gradient(90deg, transparent, ${accent}, transparent)` }} />
       </div>
