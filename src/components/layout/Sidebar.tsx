@@ -45,7 +45,6 @@ export function Sidebar() {
             >
               <Icon className="h-4 w-4" />
               {label}
-              {label === "Alarmes" && <span className="ml-auto rounded-full bg-red-500 px-1.5 text-[10px] text-white">5</span>}
             </Link>
           );
         })}
