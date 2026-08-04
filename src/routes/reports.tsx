@@ -56,7 +56,7 @@ function moneyInputToNumber(value: string) {
 
 function base64ToBlob(base64: string, mimeType = "application/pdf") {
   const byteCharacters = atob(base64);
-  const byteArrays: Uint8Array[] = [];
+  const byteArrays: BlobPart[] = [];
 
   for (let offset = 0; offset < byteCharacters.length; offset += 512) {
     const slice = byteCharacters.slice(offset, offset + 512);
