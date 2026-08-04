@@ -48,13 +48,13 @@ export function AppShell({ children }: { children: ReactNode }) {
       <aside className="sticky top-0 hidden h-screen w-60 shrink-0 flex-col border-r border-border/40 bg-sidebar/60 backdrop-blur-xl lg:flex">
         <div className="border-b border-border/40 px-4 py-4">
           <div className="flex items-center gap-3">
-            <div className="relative h-11 w-11 overflow-hidden rounded-md border border-primary/35 bg-white/95 p-1 shadow-[0_0_18px_rgba(0,180,255,0.18)]">
+            <div className="relative h-11 w-11 overflow-hidden rounded-md border border-border/60 bg-white p-1">
               <img
                 src={centerNorteLogo}
                 alt="Center Norte"
                 className="h-full w-full object-contain"
               />
-              <div className="absolute inset-0 rounded-md ring-1 ring-primary/20" />
+              <div className="absolute inset-0 rounded-md ring-1 ring-white/10" />
             </div>
             <div className="leading-tight">
               <div className="font-display text-[13px] font-bold tracking-[0.18em]">EXPO</div>
@@ -82,14 +82,14 @@ export function AppShell({ children }: { children: ReactNode }) {
                 className={cn(
                   "group flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-all",
                   active
-                    ? "bg-primary/15 text-primary shadow-[inset_2px_0_0_0_var(--primary)]"
-                    : "text-muted-foreground hover:bg-accent/40 hover:text-foreground",
+                    ? "bg-primary/10 text-primary shadow-[inset_2px_0_0_0_var(--primary)]"
+                    : "text-muted-foreground hover:bg-accent/30 hover:text-foreground",
                 )}
               >
-                <item.icon className={cn("h-4 w-4", active && "text-glow")} />
+                <item.icon className="h-4 w-4" />
                 <span>{item.label}</span>
                 {active && (
-                  <span className="ml-auto h-1.5 w-1.5 rounded-full bg-primary animate-pulse-glow" />
+                  <span className="ml-auto h-1.5 w-1.5 rounded-full bg-primary" />
                 )}
               </Link>
             );
@@ -114,7 +114,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             </div>
           </div>
           <div className="ml-auto flex items-center gap-3">
-            <div className="hidden overflow-hidden rounded-full border border-border bg-surface-2/70 p-0.5 text-[11px] shadow-[inset_0_0_18px_rgba(0,180,255,0.06)] md:flex">
+            <div className="hidden overflow-hidden rounded-full border border-border/70 bg-surface-2/70 p-0.5 text-[11px] md:flex">
               {[
                 { value: "d1", label: "D-1" },
                 { value: "7d", label: "7 dias" },
@@ -127,7 +127,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                   className={cn(
                     "min-w-16 rounded-full px-3 py-1.5 font-semibold transition-all",
                     period === p.value
-                      ? "bg-primary/25 text-primary shadow-[0_0_18px_rgba(0,180,255,0.25),inset_0_0_14px_rgba(0,180,255,0.12)]"
+                      ? "bg-primary/15 text-primary"
                       : "text-muted-foreground hover:bg-white/5 hover:text-foreground",
                   )}
                 >
@@ -135,7 +135,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 </button>
               ))}
             </div>
-            <div className="hidden items-center gap-3 rounded-full border border-border/60 bg-surface-2/55 px-3 py-1.5 text-[10px] text-muted-foreground shadow-[inset_0_0_16px_rgba(255,255,255,0.03)] xl:flex">
+            <div className="hidden items-center gap-3 rounded-full border border-border/60 bg-surface-2/55 px-3 py-1.5 text-[10px] text-muted-foreground xl:flex">
               <div className="flex items-center gap-1.5">
                 <span className="uppercase tracking-[0.16em] opacity-70">Dados da base</span>
                 <span className="font-mono font-semibold text-foreground/85">19/06/2026 (D-1)</span>

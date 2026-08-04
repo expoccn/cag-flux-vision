@@ -20,8 +20,8 @@ export function setDashboardPeriod(period: DashboardPeriod) {
   window.dispatchEvent(new CustomEvent(EVENT_NAME, { detail: period }));
 }
 
-export function useDashboardPeriod() {
-  return useSyncExternalStore(
+export function useDashboardPeriod(): DashboardPeriod {
+  return useSyncExternalStore<DashboardPeriod>(
     (onStoreChange) => {
       if (typeof window === "undefined") return () => {};
       const handler = () => onStoreChange();
@@ -33,7 +33,7 @@ export function useDashboardPeriod() {
       };
     },
     getDashboardPeriod,
-    () => "day",
+    () => "day" as DashboardPeriod,
   );
 }
 

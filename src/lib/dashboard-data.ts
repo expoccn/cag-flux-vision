@@ -188,8 +188,8 @@ function isValidDashboardPoint(point: DashboardPoint) {
 
   const kwtrValues = [
     point.kwtr_real,
-    (point as Record<string, unknown>).kwtr,
-    (point as Record<string, unknown>).kwtr_planta,
+    (point as unknown as Record<string, unknown>).kwtr,
+    (point as unknown as Record<string, unknown>).kwtr_planta,
   ];
 
   if (kwtrValues.some((value) => !isValidSensorValue(value, MAX_VALID_KWTR))) return false;
@@ -342,12 +342,12 @@ function pointDeltaT(point: DashboardPoint) {
     point.delta_t_ag,
     point.delta_t_medio,
     point.deltaT_medio,
-    (point as Record<string, unknown>).deltaT
+    (point as unknown as Record<string, unknown>).deltaT
   );
 }
 
 function pointOat(point: DashboardPoint) {
-  return pickNumber(point.oat, point.temp_externa, (point as Record<string, unknown>).temperatura_externa);
+  return pickNumber(point.oat, point.temp_externa, (point as unknown as Record<string, unknown>).temperatura_externa);
 }
 
 function chillerCap(chiller: Record<string, unknown>) {
