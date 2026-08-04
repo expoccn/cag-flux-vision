@@ -13,7 +13,9 @@ import { Route as TrendsRouteImport } from './routes/trends'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as ReportsRouteImport } from './routes/reports'
 import { Route as PumpsRouteImport } from './routes/pumps'
+import { Route as EsgRouteImport } from './routes/esg'
 import { Route as ChillersRouteImport } from './routes/chillers'
+import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as AlarmsRouteImport } from './routes/alarms'
 import { Route as AiRouteImport } from './routes/ai'
 import { Route as IndexRouteImport } from './routes/index'
@@ -39,9 +41,19 @@ const PumpsRoute = PumpsRouteImport.update({
   path: '/pumps',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EsgRoute = EsgRouteImport.update({
+  id: '/esg',
+  path: '/esg',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ChillersRoute = ChillersRouteImport.update({
   id: '/chillers',
   path: '/chillers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnalyticsRoute = AnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AlarmsRoute = AlarmsRouteImport.update({
@@ -69,7 +81,9 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/ai': typeof AiRoute
   '/alarms': typeof AlarmsRoute
+  '/analytics': typeof AnalyticsRoute
   '/chillers': typeof ChillersRouteWithChildren
+  '/esg': typeof EsgRoute
   '/pumps': typeof PumpsRoute
   '/reports': typeof ReportsRoute
   '/settings': typeof SettingsRoute
@@ -80,7 +94,9 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/ai': typeof AiRoute
   '/alarms': typeof AlarmsRoute
+  '/analytics': typeof AnalyticsRoute
   '/chillers': typeof ChillersRouteWithChildren
+  '/esg': typeof EsgRoute
   '/pumps': typeof PumpsRoute
   '/reports': typeof ReportsRoute
   '/settings': typeof SettingsRoute
@@ -92,7 +108,9 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/ai': typeof AiRoute
   '/alarms': typeof AlarmsRoute
+  '/analytics': typeof AnalyticsRoute
   '/chillers': typeof ChillersRouteWithChildren
+  '/esg': typeof EsgRoute
   '/pumps': typeof PumpsRoute
   '/reports': typeof ReportsRoute
   '/settings': typeof SettingsRoute
@@ -105,7 +123,9 @@ export interface FileRouteTypes {
     | '/'
     | '/ai'
     | '/alarms'
+    | '/analytics'
     | '/chillers'
+    | '/esg'
     | '/pumps'
     | '/reports'
     | '/settings'
@@ -116,7 +136,9 @@ export interface FileRouteTypes {
     | '/'
     | '/ai'
     | '/alarms'
+    | '/analytics'
     | '/chillers'
+    | '/esg'
     | '/pumps'
     | '/reports'
     | '/settings'
@@ -127,7 +149,9 @@ export interface FileRouteTypes {
     | '/'
     | '/ai'
     | '/alarms'
+    | '/analytics'
     | '/chillers'
+    | '/esg'
     | '/pumps'
     | '/reports'
     | '/settings'
@@ -139,7 +163,9 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AiRoute: typeof AiRoute
   AlarmsRoute: typeof AlarmsRoute
+  AnalyticsRoute: typeof AnalyticsRoute
   ChillersRoute: typeof ChillersRouteWithChildren
+  EsgRoute: typeof EsgRoute
   PumpsRoute: typeof PumpsRoute
   ReportsRoute: typeof ReportsRoute
   SettingsRoute: typeof SettingsRoute
@@ -176,11 +202,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PumpsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/esg': {
+      id: '/esg'
+      path: '/esg'
+      fullPath: '/esg'
+      preLoaderRoute: typeof EsgRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/chillers': {
       id: '/chillers'
       path: '/chillers'
       fullPath: '/chillers'
       preLoaderRoute: typeof ChillersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/analytics': {
+      id: '/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof AnalyticsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/alarms': {
@@ -230,7 +270,9 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AiRoute: AiRoute,
   AlarmsRoute: AlarmsRoute,
+  AnalyticsRoute: AnalyticsRoute,
   ChillersRoute: ChillersRouteWithChildren,
+  EsgRoute: EsgRoute,
   PumpsRoute: PumpsRoute,
   ReportsRoute: ReportsRoute,
   SettingsRoute: SettingsRoute,
@@ -239,3 +281,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
