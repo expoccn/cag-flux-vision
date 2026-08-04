@@ -97,7 +97,7 @@ export function HomeChillerCard({ chiller }: { chiller: ChillerData }) {
       <div className="relative z-10 flex items-start justify-between gap-3">
         <div>
           <div className="text-[9px] uppercase tracking-[0.28em] text-muted-foreground">Chiller</div>
-          <h3 className="font-display text-xl font-bold leading-tight tracking-wide" style={{ color: theme.hex, textShadow: `0 0 12px ${halo}` }}>
+          <h3 className="whitespace-nowrap font-display text-lg font-bold leading-tight tracking-wide" style={{ color: theme.hex, textShadow: `0 0 12px ${halo}` }}>
             {chiller.name}
           </h3>
         </div>
