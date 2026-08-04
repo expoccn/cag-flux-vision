@@ -19,7 +19,7 @@ export function SeverityBadge({ severity, className }: { severity: Severity; cla
         className,
       )}
     >
-      <span className="h-1.5 w-1.5 rounded-full bg-current animate-pulse-glow" />
+      <span className="h-1.5 w-1.5 rounded-full bg-current" />
       {s.label}
     </span>
   );
