@@ -17,7 +17,7 @@ const toneText: Record<string, string> = {
 export function KpiSparkCard({ kpi, icon: Icon, className }: { kpi: KpiSpark; icon?: LucideIcon; className?: string }) {
   const TrendIcon = kpi.trend === "up" ? ArrowUpRight : kpi.trend === "down" ? ArrowDownRight : Minus;
   return (
-    <div className={cn("glass-card group relative overflow-hidden p-3 transition-all hover:translate-y-[-2px] hover:border-primary/40", className)}>
+    <div className={cn("glass-card group relative overflow-hidden p-3 transition-all hover:border-primary/30", className)}>
       <div className="flex items-start justify-between gap-2">
         <div className="text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground">{kpi.label}</div>
         {Icon ? <Icon className={cn("h-3.5 w-3.5", toneText[kpi.tone])} /> : null}
@@ -33,7 +33,7 @@ export function KpiSparkCard({ kpi, icon: Icon, className }: { kpi: KpiSpark; ic
       <div className="-mx-1 mt-1.5">
         <Sparkline data={kpi.spark} tone={kpi.tone} height={28} />
       </div>
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-60" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/25 to-transparent opacity-50" />
     </div>
   );
 }
